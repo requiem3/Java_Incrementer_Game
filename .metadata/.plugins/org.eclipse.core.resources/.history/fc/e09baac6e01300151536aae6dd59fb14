@@ -1,0 +1,47 @@
+package test_es;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import javax.swing.JPanel;
+import javax.swing.Scrollable;
+
+public class test1 extends JPanel implements Scrollable {
+
+    public test1() {
+
+    }
+    
+    @Override
+    public Dimension getPreferredScrollableViewportSize() {
+    	
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g); 
+    }
+
+	@Override
+	public int getScrollableBlockIncrement(Rectangle visibleRect,
+			int orientation, int direction) {
+		return 0;
+	}
+
+	@Override
+	public boolean getScrollableTracksViewportHeight() {
+		return false;
+	}
+
+	@Override
+	public boolean getScrollableTracksViewportWidth() {
+		return false;
+	}
+
+	@Override
+	public int getScrollableUnitIncrement(Rectangle visibleRect,
+			int orientation, int direction) {
+		return 0;
+	}
+}
