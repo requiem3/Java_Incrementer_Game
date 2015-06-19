@@ -26,19 +26,24 @@ import systems.*;
 
 public class Board {
 	private ImageIcon ii;
-	private Game game;
+	private ArmySystem armSys;
 	
 	//GUI elements
 	private JLabel levelLabel;
 	private JLabel expLabel;
 	private JLabel cashLabel;
+	private JLabel chickenCountLabel;
+	private JLabel chickenCostLabel;
 	private JButton level1Button;
 	
 	private Thread gameThread;
     final BlockingQueue<Integer> queueZoneNum = new LinkedBlockingQueue<Integer>();
     final BlockingQueue<Integer> queueLevelNum = new LinkedBlockingQueue<Integer>();
+    final BlockingQueue<Integer> queueBuyNum = new LinkedBlockingQueue<Integer>();
 	
 	public Board() {
+		queueZoneNum.add(1);
+		armSys = new ArmySystem();
 		createAndShowGUI();
 	}
 	
@@ -80,7 +85,6 @@ public class Board {
 		neighborhoodButton.setIcon(ii);
 		neighborhoodButton.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	        	enableButtons();
 	        	queueZoneNum.add(1);
 	        }
 	    });
@@ -120,33 +124,37 @@ public class Board {
 	    leftBottom.setPreferredSize(new Dimension(333, 300));
 	    left.add(leftBottom);
 	    
-	    GridBagConstraints c = new GridBagConstraints();
-	    c.anchor = GridBagConstraints.FIRST_LINE_START;
+	    GridBagConstraints gbc2 = new GridBagConstraints();
+	    gbc2.anchor = GridBagConstraints.NORTHWEST;
 	    
 	    JLabel zoneLevelLabel = new JLabel();
 	    zoneLevelLabel.setText("Levels");
-	    c.gridx = 0;
-	    c.gridy = 0;
-	    leftBottom.add(zoneLevelLabel, c);
+	    gbc2.gridx = 0;
+	    gbc2.gridy = 0;
+	    gbc2.weighty = 0;
+	    gbc2.weightx = 0;
+	    leftBottom.add(zoneLevelLabel, gbc2);
 	    
 		level1Button = new JButton();
 		level1Button.setPreferredSize(new Dimension(50, 50));
-		level1Button.setVisible(false);
-		c.gridx = 0;
-	    c.gridy = 1;
+		gbc2.gridx = 0;
+	    gbc2.gridy = 1;
+	    gbc2.weighty = 1;
+	    gbc2.weightx = 0;
 	    level1Button.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	queueLevelNum.add(1);
 	        }
 	    });
-		leftBottom.add(level1Button, c);
+		leftBottom.add(level1Button, gbc2);
 		
 		JButton level2Button = new JButton();
 		level2Button.setPreferredSize(new Dimension(50, 50));
-		level2Button.setVisible(false);
-		c.gridx = 1;
-	    c.gridy = 1;
-		leftBottom.add(level2Button, c);
+		gbc2.gridx = 1;
+	    gbc2.gridy = 1;
+	    gbc2.weighty = 1;
+	    gbc2.weightx = 1;
+		leftBottom.add(level2Button, gbc2);
 	
 	    JPanel middle = new JPanel();
 	    pane.add(middle);
@@ -178,10 +186,58 @@ public class Board {
 	    middleBottom.setBackground(Color.yellow);
 	    middle.add(middleBottom);
 	
-	    JPanel right = new JPanel();
+	    JPanel right = new JPanel(new GridBagLayout());
 	    right.setPreferredSize(new Dimension(333,600));
-	    right.setBackground(Color.blue);
-	
+
+	    GridBagConstraints gbc3 = new GridBagConstraints();
+	    gbc3.anchor = GridBagConstraints.NORTHWEST;
+	    
+	    JLabel armyLabel = new JLabel();
+	    armyLabel.setText("Army");
+	    gbc3.gridx = 0;
+	    gbc3.gridy = 0;
+	    gbc3.weighty = 0;
+	    gbc3.weightx = 0;
+	    right.add(armyLabel, gbc3);
+	    
+	    JLabel chickenLabel = new JLabel();
+	    chickenLabel.setText("Maniacal Chicken");
+	    gbc3.gridx = 0;
+	    gbc3.gridy = 1;
+	    gbc3.weighty = 0;
+	    gbc3.weightx = 0;
+	    right.add(chickenLabel, gbc3);
+	    
+	    chickenCountLabel = new JLabel();
+	    chickenCountLabel.setText("Count: ");
+	    gbc3.gridx = 0;
+	    gbc3.gridy = 2;
+	    gbc3.weighty = 0;
+	    gbc3.weightx = 0;
+	    right.add(chickenCountLabel, gbc3);
+	    
+	    chickenCostLabel = new JLabel();
+	    chickenCostLabel.setText("Cost: ");
+	    gbc3.gridx = 0;
+	    gbc3.gridy = 3;
+	    gbc3.weighty = 1;
+	    gbc3.weightx = 1;
+	    right.add(chickenCostLabel, gbc3);
+	    
+	    JButton chickenButton = new JButton();
+	    chickenButton.setPreferredSize(new Dimension(50, 50));
+	    gbc3.gridx = 1;
+	    gbc3.gridy = 1;
+	    gbc3.gridheight = 3;
+	    gbc3.weighty = 0;
+	    gbc3.weightx = 0;
+	    chickenButton.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	queueBuyNum.add(1);
+	        }
+	    });
+	    right.add(chickenButton, gbc3);
+	    
 	    pane.add(right);
 	    
     }
@@ -195,7 +251,7 @@ public class Board {
         frame.pack();
         frame.setVisible(true);
         
-        gameThread = new Thread(new Game(this, queueZoneNum, queueLevelNum));
+        gameThread = new Thread(new Game(this, queueZoneNum, queueLevelNum, queueBuyNum));
     	gameThread.start();	
     }
 	
@@ -213,6 +269,14 @@ public class Board {
 	
 	public JLabel getCashLabel() {
 		return(cashLabel);
+	}
+	
+	public JLabel getChickenCountLabel() {
+		return(chickenCountLabel);
+	}
+	
+	public JLabel getChickenCostLabel() {
+		return(chickenCostLabel);
 	}
 	
 	public void enableButtons() {
