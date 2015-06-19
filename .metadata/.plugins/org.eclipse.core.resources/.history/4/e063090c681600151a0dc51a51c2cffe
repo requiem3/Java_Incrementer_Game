@@ -28,27 +28,21 @@ import javax.swing.SwingUtilities;
 import test_es.Game;
 
 public class Board {
-	private ImageIcon ii;
-	private Game game;
-	private JLabel levelLabel;
-	private JLabel expLabel;
-	private JLabel cashLabel;
-	private Thread gameThread;
+	private static ImageIcon ii;
+	private static Game game;
 	
-	public Board() {
-		createAndShowGUI();
-	}
+	private JLabel zoneLabel;
 	
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Board b = new Board();
+                createAndShowGUI();
             }
         });
     }
     
-    public void addComponentsToPane(Container pane) {
+    public static void addComponentsToPane(Container pane) {
         pane.setLayout(new GridLayout(1, 0));
         pane.setPreferredSize(new Dimension(1000,600));
 
@@ -68,7 +62,6 @@ public class Board {
 		gbc.weightx = 1;
 		gbc.insets = new Insets(5, 10, 5, 10);
 		
-		JLabel zoneLabel = new JLabel();
 		zoneLabel.setText("Zones");
 		leftTop.add(zoneLabel, gbc);
 		
@@ -145,9 +138,9 @@ public class Board {
 	    jl2.setText("Scientist");
 	    middleTop.add(jl2);
 	    
-	    levelLabel = new JLabel();
-	    levelLabel.setText("Level: ");
-	    middleTop.add(levelLabel);
+	    JLabel jl3 = new JLabel();
+	    jl3.setText("Level: ");
+	    middleTop.add(jl3);
 	    
 	    JLabel jl4 = new JLabel();
 	    jl4.setText("Exp: ");
@@ -170,7 +163,7 @@ public class Board {
 	    
     }
 
-    private void createAndShowGUI() {
+    private static void createAndShowGUI() {
     	loadImages();
         JFrame frame = new JFrame("GridBagLayoutDemo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,23 +172,14 @@ public class Board {
         frame.pack();
         frame.setVisible(true);
         
-        gameThread = new Thread(new Game(this));
-    	gameThread.start();	
+        game = new Game(frame.getContentPane());
     }
 	
-	private void loadImages() {
+	private static void loadImages() {
 		ii = new ImageIcon("nhButton.png");
 	}
 	
-	public JLabel getLevelLabel() {
-		return(levelLabel);
-	}
-	
-	public JLabel getExpLabel() {
-		return(expLabel);
-	}
-	
-	public JLabel getCashLabel() {
-		return(cashLabel);
+	public JLabel getZoneLabel() {
+		return(zoneLabel);
 	}
 }
