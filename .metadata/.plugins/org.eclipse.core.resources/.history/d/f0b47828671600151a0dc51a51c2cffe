@@ -1,0 +1,13 @@
+package test_es;
+
+import java.awt.Container;
+
+public class Game {
+	public void Game(Container pane) {
+		
+	}
+	
+	public void start() {
+		
+	}
+}
