@@ -1,0 +1,19 @@
+package test_es;
+
+import java.awt.Container;
+
+import javax.swing.JLabel;
+
+public class Game {
+	private JLabel levelLabel;
+	private JLabel expLabel;
+	private JLabel cashLabel;
+	
+	public Game(Board board) {
+		levelLabel = board.getLevelLabel();
+	}
+	
+	public void start() {
+		
+	}
+}

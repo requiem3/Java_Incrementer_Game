@@ -2,19 +2,12 @@ package test_es;
 
 import java.awt.Color;
 
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
 
 import test_es.Game;
@@ -72,10 +64,10 @@ public class Board {
 		zoneLabel.setText("Zones");
 		leftTop.add(zoneLabel, gbc);
 		
-		JButton jb = new JButton();
-		jb.setPreferredSize(new Dimension(200, 50));
-		jb.setIcon(ii);
-		leftTop.add(jb, gbc);
+		JButton neighborhoodButton = new JButton();
+		neighborhoodButton.setPreferredSize(new Dimension(200, 50));
+		neighborhoodButton.setIcon(ii);
+		leftTop.add(neighborhoodButton, gbc);
 		
 		JButton jb1 = new JButton();
 		jb1.setPreferredSize(new Dimension(200, 50));
@@ -114,23 +106,23 @@ public class Board {
 	    GridBagConstraints c = new GridBagConstraints();
 	    c.anchor = GridBagConstraints.FIRST_LINE_START;
 	    
-	    JLabel jl1 = new JLabel();
-	    jl1.setText("Levels");
+	    JLabel zoneLevelLabel = new JLabel();
+	    zoneLevelLabel.setText("Levels");
 	    c.gridx = 0;
 	    c.gridy = 0;
-	    leftBottom.add(jl1, c);
+	    leftBottom.add(zoneLevelLabel, c);
 	    
-		JButton jb7 = new JButton();
-		jb7.setPreferredSize(new Dimension(50, 50));
+		JButton level1Button = new JButton();
+		level1Button.setPreferredSize(new Dimension(50, 50));
 		c.gridx = 0;
 	    c.gridy = 1;
-		leftBottom.add(jb7, c);
+		leftBottom.add(level1Button, c);
 		
-		JButton jb8 = new JButton();
-		jb8.setPreferredSize(new Dimension(50, 50));
+		JButton level2Button = new JButton();
+		level2Button.setPreferredSize(new Dimension(50, 50));
 		c.gridx = 1;
 	    c.gridy = 1;
-		leftBottom.add(jb8, c);
+		leftBottom.add(level2Button, c);
 	
 	    JPanel middle = new JPanel();
 	    pane.add(middle);
@@ -141,21 +133,21 @@ public class Board {
 	    middleTop.setLayout(new BoxLayout(middleTop, BoxLayout.Y_AXIS));
 	    middle.add(middleTop);
 	    
-	    JLabel jl2 = new JLabel();
-	    jl2.setText("Scientist");
-	    middleTop.add(jl2);
+	    JLabel playerLabel = new JLabel();
+	    playerLabel.setText("Scientist");
+	    middleTop.add(playerLabel);
 	    
 	    levelLabel = new JLabel();
 	    levelLabel.setText("Level: ");
 	    middleTop.add(levelLabel);
 	    
-	    JLabel jl4 = new JLabel();
-	    jl4.setText("Exp: ");
-	    middleTop.add(jl4);
+	    expLabel = new JLabel();
+	    expLabel.setText("Exp: ");
+	    middleTop.add(expLabel);
 	    
-	    JLabel jl5 = new JLabel();
-	    jl5.setText("Cash: ");
-	    middleTop.add(jl5);
+	    cashLabel = new JLabel();
+	    cashLabel.setText("Cash: ");
+	    middleTop.add(cashLabel);
 	
 	    JPanel middleBottom = new JPanel();
 	    middleBottom.setPreferredSize(new Dimension(333, 400));

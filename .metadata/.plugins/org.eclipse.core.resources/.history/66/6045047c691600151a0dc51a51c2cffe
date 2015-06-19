@@ -1,0 +1,15 @@
+package test_es;
+
+import java.awt.Container;
+
+public class Game {
+	private JLabel levelLabel;
+	
+	public Game() {
+		
+	}
+	
+	public void start() {
+		
+	}
+}

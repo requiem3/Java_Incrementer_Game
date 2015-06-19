@@ -22,11 +22,16 @@ public class Game implements Runnable {
 		levelLabel = board.getLevelLabel();
 		expLabel = board.getExpLabel();
 		cashLabel = board.getCashLabel();
-		
+
 		numSys = new NumberSystem();
+		levelLabel.setText("Level: " + Integer.toString(numSys.getLevel()));
+		expLabel.setText("Exp: " + Integer.toString(numSys.getExp()) + "/" + Integer.toString(numSys.getExpReq()));
+		cashLabel.setText("Cash: " + Integer.toString(numSys.getCash()));
 	}
 	
 	public void run() {
-		return(0);
+		while(true) {
+			
+		}
 	}
 }

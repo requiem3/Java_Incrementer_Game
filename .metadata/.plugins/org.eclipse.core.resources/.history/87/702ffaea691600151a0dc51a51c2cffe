@@ -1,0 +1,25 @@
+package test_es;
+
+import java.awt.Container;
+
+import javax.swing.JLabel;
+import systems.*;
+
+public class Game {
+	private NumberSystem numSys;
+	
+	//GUI Variables
+	private JLabel levelLabel;
+	private JLabel expLabel;
+	private JLabel cashLabel;
+	
+	public Game(Board board) {
+		levelLabel = board.getLevelLabel();
+		expLabel = board.getExpLabel();
+		cashLabel = board.getCashLabel();
+	}
+	
+	public void start() {
+		
+	}
+}
