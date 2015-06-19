@@ -1,13 +1,17 @@
 package test_es;
 
 import java.awt.Color;
-
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,14 +22,21 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import test_es.Game;
+import systems.*;
 
 public class Board {
 	private ImageIcon ii;
 	private Game game;
+	
+	//GUI elements
 	private JLabel levelLabel;
 	private JLabel expLabel;
 	private JLabel cashLabel;
+	private JButton level1Button;
+	
 	private Thread gameThread;
+    final BlockingQueue<Integer> queueZoneNum = new LinkedBlockingQueue<Integer>();
+    final BlockingQueue<Integer> queueLevelNum = new LinkedBlockingQueue<Integer>();
 	
 	public Board() {
 		createAndShowGUI();
@@ -67,6 +78,12 @@ public class Board {
 		JButton neighborhoodButton = new JButton();
 		neighborhoodButton.setPreferredSize(new Dimension(200, 50));
 		neighborhoodButton.setIcon(ii);
+		neighborhoodButton.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	enableButtons();
+	        	queueZoneNum.add(1);
+	        }
+	    });
 		leftTop.add(neighborhoodButton, gbc);
 		
 		JButton jb1 = new JButton();
@@ -112,14 +129,21 @@ public class Board {
 	    c.gridy = 0;
 	    leftBottom.add(zoneLevelLabel, c);
 	    
-		JButton level1Button = new JButton();
+		level1Button = new JButton();
 		level1Button.setPreferredSize(new Dimension(50, 50));
+		level1Button.setVisible(false);
 		c.gridx = 0;
 	    c.gridy = 1;
+	    level1Button.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	queueLevelNum.add(1);
+	        }
+	    });
 		leftBottom.add(level1Button, c);
 		
 		JButton level2Button = new JButton();
 		level2Button.setPreferredSize(new Dimension(50, 50));
+		level2Button.setVisible(false);
 		c.gridx = 1;
 	    c.gridy = 1;
 		leftBottom.add(level2Button, c);
@@ -171,7 +195,7 @@ public class Board {
         frame.pack();
         frame.setVisible(true);
         
-        gameThread = new Thread(new Game(this));
+        gameThread = new Thread(new Game(this, queueZoneNum, queueLevelNum));
     	gameThread.start();	
     }
 	
@@ -190,4 +214,9 @@ public class Board {
 	public JLabel getCashLabel() {
 		return(cashLabel);
 	}
+	
+	public void enableButtons() {
+		level1Button.setVisible(true);
+	}
+	
 }
