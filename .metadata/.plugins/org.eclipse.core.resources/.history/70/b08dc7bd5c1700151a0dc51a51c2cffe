@@ -51,7 +51,6 @@ public class Game implements Runnable {
 		cashLabel = board.getCashLabel();
 		chickCostLabel = board.getChickenCostLabel();
 		chickCountLabel = board.getChickenCountLabel();
-		pBar = board.getProgressBar();
 		
 		updateGUI();
 	}
@@ -73,7 +72,6 @@ public class Game implements Runnable {
 				
 				pDPS = armSys.calculateDPS();
 				pHP = zonSys.zones[zoneNum-1][0];
-				pBar.setMaximum(pHP);
 				
 				while(pHP >= 0) {
 					if(queueLevelNum.size() != 0) {
@@ -83,7 +81,6 @@ public class Game implements Runnable {
 					}
 					checkBuy();
 					System.out.println(pHP);
-					pBar.setValue(pBar.getMaximum() - pHP);
 					try {
 						Thread.sleep(200); //THIS IS UGLY AS FUCK HOLY SHIT
 						checkBuy();

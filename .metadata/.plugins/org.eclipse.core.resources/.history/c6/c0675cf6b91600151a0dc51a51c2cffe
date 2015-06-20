@@ -18,7 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -28,7 +27,6 @@ import systems.*;
 public class Board {
 	private ImageIcon ii;
 	private ArmySystem armSys;
-	private int currentZone;
 	
 	//GUI elements
 	private JLabel levelLabel;
@@ -37,7 +35,6 @@ public class Board {
 	private JLabel chickenCountLabel;
 	private JLabel chickenCostLabel;
 	private JButton level1Button;
-	private JProgressBar progressBar;
 	
 	private Thread gameThread;
     final BlockingQueue<Integer> queueZoneNum = new LinkedBlockingQueue<Integer>();
@@ -45,7 +42,7 @@ public class Board {
     final BlockingQueue<Integer> queueBuyNum = new LinkedBlockingQueue<Integer>();
 	
 	public Board() {
-		currentZone = 1;
+		queueZoneNum.add(1);
 		armSys = new ArmySystem();
 		createAndShowGUI();
 	}
@@ -88,7 +85,7 @@ public class Board {
 		neighborhoodButton.setIcon(ii);
 		neighborhoodButton.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	        	currentZone = 1;
+	        	queueZoneNum.add(1);
 	        }
 	    });
 		leftTop.add(neighborhoodButton, gbc);
@@ -147,7 +144,6 @@ public class Board {
 	    level1Button.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	queueLevelNum.add(1);
-	        	queueZoneNum.add(currentZone);
 	        }
 	    });
 		leftBottom.add(level1Button, gbc2);
@@ -158,18 +154,7 @@ public class Board {
 	    gbc2.gridy = 1;
 	    gbc2.weighty = 1;
 	    gbc2.weightx = 1;
-	    level2Button.addActionListener(new ActionListener() {
-	        public void actionPerformed(ActionEvent e) {
-	        	queueLevelNum.add(2);
-	        	queueZoneNum.add(currentZone);
-	        }
-	    });
 		leftBottom.add(level2Button, gbc2);
-		
-		progressBar = new JProgressBar(0, 0);
-		progressBar.setValue(0);
-		progressBar.setStringPainted(true);
-		leftBottom.add(progressBar);
 	
 	    JPanel middle = new JPanel();
 	    pane.add(middle);
@@ -294,8 +279,8 @@ public class Board {
 		return(chickenCostLabel);
 	}
 	
-	public JProgressBar getProgressBar() {
-		return(progressBar);
+	public void enableButtons() {
+		level1Button.setVisible(true);
 	}
 	
 }

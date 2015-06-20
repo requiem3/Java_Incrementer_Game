@@ -18,7 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -37,7 +36,6 @@ public class Board {
 	private JLabel chickenCountLabel;
 	private JLabel chickenCostLabel;
 	private JButton level1Button;
-	private JProgressBar progressBar;
 	
 	private Thread gameThread;
     final BlockingQueue<Integer> queueZoneNum = new LinkedBlockingQueue<Integer>();
@@ -165,11 +163,6 @@ public class Board {
 	        }
 	    });
 		leftBottom.add(level2Button, gbc2);
-		
-		progressBar = new JProgressBar(0, 0);
-		progressBar.setValue(0);
-		progressBar.setStringPainted(true);
-		leftBottom.add(progressBar);
 	
 	    JPanel middle = new JPanel();
 	    pane.add(middle);
@@ -294,8 +287,8 @@ public class Board {
 		return(chickenCostLabel);
 	}
 	
-	public JProgressBar getProgressBar() {
-		return(progressBar);
+	public void enableButtons() {
+		level1Button.setVisible(true);
 	}
 	
 }

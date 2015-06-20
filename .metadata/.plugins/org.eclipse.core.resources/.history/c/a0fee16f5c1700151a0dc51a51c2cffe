@@ -169,7 +169,6 @@ public class Board {
 		progressBar = new JProgressBar(0, 0);
 		progressBar.setValue(0);
 		progressBar.setStringPainted(true);
-		leftBottom.add(progressBar);
 	
 	    JPanel middle = new JPanel();
 	    pane.add(middle);
@@ -294,8 +293,8 @@ public class Board {
 		return(chickenCostLabel);
 	}
 	
-	public JProgressBar getProgressBar() {
-		return(progressBar);
+	public void enableButtons() {
+		level1Button.setVisible(true);
 	}
 	
 }

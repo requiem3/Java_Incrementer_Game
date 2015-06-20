@@ -295,7 +295,7 @@ public class Board {
 	}
 	
 	public JProgressBar getProgressBar() {
-		return(progressBar);
+		
 	}
 	
 }

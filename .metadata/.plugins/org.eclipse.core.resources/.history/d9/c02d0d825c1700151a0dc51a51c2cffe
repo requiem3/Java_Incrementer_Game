@@ -294,8 +294,8 @@ public class Board {
 		return(chickenCostLabel);
 	}
 	
-	public JProgressBar getProgressBar() {
-		return(progressBar);
+	public void enableButtons() {
+		level1Button.setVisible(true);
 	}
 	
 }

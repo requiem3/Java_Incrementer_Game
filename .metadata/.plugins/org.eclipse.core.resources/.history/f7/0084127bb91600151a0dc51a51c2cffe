@@ -5,13 +5,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.swing.JLabel;
-import javax.swing.JProgressBar;
 
 import systems.*;
-
-//TODO:
-//TODO: Handle multiple level clicks
-//TODO:
 
 public class Game implements Runnable {
 	//Game variables
@@ -30,7 +25,6 @@ public class Game implements Runnable {
 	private JLabel cashLabel;
 	private JLabel chickCostLabel;
 	private JLabel chickCountLabel;
-	private JProgressBar pBar;
 	
 	//Threading
     private BlockingQueue<Integer> queueZoneNum = new LinkedBlockingQueue<Integer>();
@@ -51,7 +45,6 @@ public class Game implements Runnable {
 		cashLabel = board.getCashLabel();
 		chickCostLabel = board.getChickenCostLabel();
 		chickCountLabel = board.getChickenCountLabel();
-		pBar = board.getProgressBar();
 		
 		updateGUI();
 	}
@@ -64,26 +57,18 @@ public class Game implements Runnable {
 			checkBuy();
 			if(queueLevelNum.size() != 0) {
 				try {
-					zoneNum = queueZoneNum.take();
+					zoneNum = queueZoneNum.poll();
 					levelNum = queueLevelNum.take();
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (InterruptedException e) {
+					System.out.println("queue error");
+					e.printStackTrace();
 				}
-				
 				pDPS = armSys.calculateDPS();
 				pHP = zonSys.zones[zoneNum-1][0];
-				pBar.setMaximum(pHP);
 				
 				while(pHP >= 0) {
-					if(queueLevelNum.size() != 0) {
-						if(queueLevelNum.poll() == levelNum) {
-							queueLevelNum.clear();
-						}
-					}
 					checkBuy();
 					System.out.println(pHP);
-					pBar.setValue(pBar.getMaximum() - pHP);
 					try {
 						Thread.sleep(200); //THIS IS UGLY AS FUCK HOLY SHIT
 						checkBuy();

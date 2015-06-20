@@ -83,7 +83,6 @@ public class Game implements Runnable {
 					}
 					checkBuy();
 					System.out.println(pHP);
-					pBar.setValue(pBar.getMaximum() - pHP);
 					try {
 						Thread.sleep(200); //THIS IS UGLY AS FUCK HOLY SHIT
 						checkBuy();

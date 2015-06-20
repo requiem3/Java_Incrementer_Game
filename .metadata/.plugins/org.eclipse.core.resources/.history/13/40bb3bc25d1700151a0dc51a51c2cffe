@@ -42,6 +42,8 @@ public class ArmySystem {
 		army[6][0] = 0;
 		army[6][1] = 1;
 		army[6][2] = 1;
+
+		System.out.println(army[0][0]);
 	}
 	
 	public int calculateDPS() {
