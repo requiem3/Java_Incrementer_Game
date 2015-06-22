@@ -281,7 +281,7 @@ public class Board {
 	    gbc3.weighty = 1;
 	    gbc3.weightx = 1;
 	    right.add(blobCountLabel, gbc3);
-	    
+	    /*
 	    blobCostLabel = new JLabel();
 	    blobCostLabel.setText("Cost: ");
 	    gbc3.gridx = 0;
@@ -303,7 +303,7 @@ public class Board {
 	        }
 	    });
 	    right.add(blobButton, gbc3);
-	    
+	    */
 	    pane.add(right);
 	    
     }
