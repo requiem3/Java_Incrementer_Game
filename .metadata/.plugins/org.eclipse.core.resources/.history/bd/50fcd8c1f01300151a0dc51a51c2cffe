@@ -1,7 +1,0 @@
-package Systems;
-
-public class achievementSystem {
-	public achievementSystem() {
-		
-	}
-}

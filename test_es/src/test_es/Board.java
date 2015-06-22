@@ -36,6 +36,18 @@ public class Board {
 	private JLabel cashLabel;
 	private JLabel chickenCountLabel;
 	private JLabel chickenCostLabel;
+	private JLabel blobCountLabel;
+	private JLabel blobCostLabel;
+	private JLabel dogCountLabel;
+	private JLabel dogCostLabel;
+	private JLabel zombieCountLabel;
+	private JLabel zombieCostLabel;
+	private JLabel walkerCountLabel;
+	private JLabel walkerCostLabel;
+	private JLabel sniperCountLabel;
+	private JLabel sniperCostLabel;
+	private JLabel doomCountLabel;
+	private JLabel doomCostLabel;
 	private JButton level1Button;
 	private JProgressBar progressBar;
 	
@@ -59,6 +71,7 @@ public class Board {
         });
     }
     
+    //GUI goes top left, bottom left, middle top, middle bottom, then right side
     public void addComponentsToPane(Container pane) {
         pane.setLayout(new GridLayout(1, 0));
         pane.setPreferredSize(new Dimension(1000,600));
@@ -216,7 +229,7 @@ public class Board {
 	    right.add(armyLabel, gbc3);
 	    
 	    JLabel chickenLabel = new JLabel();
-	    chickenLabel.setText("Maniacal Chicken");
+	    chickenLabel.setText("Chicken");
 	    gbc3.gridx = 0;
 	    gbc3.gridy = 1;
 	    gbc3.weighty = 0;
@@ -235,8 +248,8 @@ public class Board {
 	    chickenCostLabel.setText("Cost: ");
 	    gbc3.gridx = 0;
 	    gbc3.gridy = 3;
-	    gbc3.weighty = 1;
-	    gbc3.weightx = 1;
+	    gbc3.weighty = 0;
+	    gbc3.weightx = 0;
 	    right.add(chickenCostLabel, gbc3);
 	    
 	    JButton chickenButton = new JButton();
@@ -253,6 +266,44 @@ public class Board {
 	    });
 	    right.add(chickenButton, gbc3);
 	    
+	    JLabel blobLabel = new JLabel();
+	    blobLabel.setText("Blob");
+	    gbc3.gridx = 0;
+	    gbc3.gridy = 4;
+	    gbc3.weighty = 0;
+	    gbc3.weightx = 0;
+	    right.add(blobLabel, gbc3);
+	    
+	    blobCountLabel = new JLabel();
+	    blobCountLabel.setText("Count: ");
+	    gbc3.gridx = 0;
+	    gbc3.gridy = 5;
+	    gbc3.weighty = 1;
+	    gbc3.weightx = 1;
+	    right.add(blobCountLabel, gbc3);
+	    /*
+	    blobCostLabel = new JLabel();
+	    blobCostLabel.setText("Cost: ");
+	    gbc3.gridx = 0;
+	    gbc3.gridy = 6;
+	    gbc3.weighty = 1;
+	    gbc3.weightx = 1;
+	    right.add(blobCostLabel, gbc3);
+	    
+	    JButton blobButton = new JButton();
+	    blobButton.setPreferredSize(new Dimension(50, 50));
+	    gbc3.gridx = 1;
+	    gbc3.gridy = 4;
+	    gbc3.gridheight = 3;
+	    gbc3.weighty = 0;
+	    gbc3.weightx = 0;
+	    blobButton.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	queueBuyNum.add(2);
+	        }
+	    });
+	    right.add(blobButton, gbc3);
+	    */
 	    pane.add(right);
 	    
     }
